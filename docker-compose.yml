@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: kanban-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - h2-data:/data
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/data/kanban-db
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: password
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: kanban-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  h2-data:

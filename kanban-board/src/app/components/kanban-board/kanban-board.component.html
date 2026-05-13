@@ -1,0 +1,42 @@
+<div class="kanban-container">
+  <div *ngFor="let column of columns" class="kanban-column">
+    <div class="column-header">
+      <h3>{{ getColumnTitle(column.title) }}</h3>
+      <span class="task-count">{{ getTasksByStatus(column.id).length }}</span>
+    </div>
+
+    <div
+      class="column-content"
+      cdkDropList
+      [id]="getDropListId(column.id)"
+      [cdkDropListData]="getTasksByStatus(column.id)"
+      (cdkDropListDropped)="drop($event, column.id)"
+      [cdkDropListConnectedTo]="getConnectedLists()"
+      cdkDropListSortingDisabled
+    >
+      <div
+        *ngIf="getTasksByStatus(column.id).length === 0"
+        class="empty-satate"
+      >
+        <p>No tasks yet. Create one to get started!</p>
+      </div>
+
+      <div
+        *ngFor="let task of getTasksByStatus(column.id)"
+        cdkDrag
+        [cdkDragData]="task"
+        class="drag-wrapper"
+      >
+        <app-task-card
+          [title]="task.title"
+          [description]="task.description"
+          [priority]="task.priority"
+          [taskId]="task.id"
+          (delete)="deleteTask($event)"
+          (edit)="onEditTask(task)"
+        >
+        </app-task-card>
+      </div>
+    </div>
+  </div>
+</div>

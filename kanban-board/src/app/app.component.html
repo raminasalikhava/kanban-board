@@ -1,0 +1,101 @@
+<div class="container">
+  <h1>Kanban Board</h1>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading tasks...</p>
+  </div>
+
+  <div *ngIf="!loading">
+    <button (click)="onCreateTaskClick()" class="btn-add">+ Add task</button>
+    <!-- 
+    <div *ngIf="showForm" class="form-container">
+      <h3>Create New Task</h3>
+
+      <form [formGroup]="taskForm">
+        <div class="form-group">
+          <label for="name-input">Title *</label>
+          <input
+            type="text"
+            placeholder="Enter task title"
+            class="input"
+            formControlName="title"
+          />
+          <div *ngIf="title?.touched && title?.invalid" class="error-message">
+            <span *ngIf="title?.errors?.['required']">Title is required</span>
+            <span *ngIf="title?.errors?.['minlength']"
+              >Title must be at least 3 characters</span
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="desc-input">Description</label>
+
+          <textarea
+            type="text"
+            formControlName="description"
+            placeholder="Enter task description (max 3000 characters)"
+            class="input"
+          ></textarea>
+
+          <div
+            *ngIf="description?.touched && description?.invalid"
+            class="error-message"
+          >
+            <span *ngIf="description?.errors?.['maxLength']"
+              >Description is too long</span
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">Priority</label>
+
+          <select formControlName="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            (click)="addTask()"
+            class="btn-primary"
+            [disabled]="taskForm.invalid"
+          >
+            Create task
+          </button>
+          <button
+            type="button"
+            (click)="showForm = false"
+            class="btn-secondary"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div> -->
+
+    <div class="kanban-wrapper">
+      <app-kanban-board
+        [tasks]="tasks"
+        [columns]="columns"
+        (taskDeleted)="deleteTask($event)"
+        (taskMoved)="moveTask($event)"
+      >
+      </app-kanban-board>
+    </div>
+
+    <ng-container *ngIf="modalState$ | async as state">
+      <app-task-modal
+        *ngIf="state.isOpen"
+        [task]="state.task"
+        [mode]="state.mode"
+        (close)="closeModal()"
+        (submit)="onTaskSubmit($event)"
+      ></app-task-modal>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="card" [ngClass]="'priority-' + priority">
+  <div class="card-header">
+    <h3>{{ title }}</h3>
+    <div class="card-actions">
+      <span class="priority-badge">{{ priority }}</span>
+      <button class="btn-edit" (click)="onEdit()">✎</button>
+      <button class="btn-delete" (click)="onDelete()">×</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <p>{{ description }}</p>
+  </div>
+</div>
