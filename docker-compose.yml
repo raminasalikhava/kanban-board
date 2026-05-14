@@ -1,7 +1,7 @@
 services:
   backend:
     build:
-      context: ./backend
+      context: ./kanban-api
     container_name: kanban-backend
     ports:
       - "8080:8080"
@@ -14,7 +14,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./kanban-board
     container_name: kanban-frontend
     ports:
       - "4200:80"

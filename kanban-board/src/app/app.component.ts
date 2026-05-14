@@ -110,4 +110,9 @@ export class AppComponent implements OnInit, OnDestroy {
         error: (err) => console.error('Error moving task:', err),
       });
   }
+
+  getTasksCount(status: string): number {
+    console.log("Tasks ", this.tasks)
+    return this.tasks.filter((task) => task.status === status).length;
+  }
 }

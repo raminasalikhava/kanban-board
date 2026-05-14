@@ -1,13 +1,13 @@
-<div class="card" [ngClass]="'priority-' + priority">
+<div class="task-card" [ngClass]="'priority-' + priority">
   <div class="card-header">
-    <h3>{{ title }}</h3>
+    <h3 class="card-title">{{ title }}</h3>
     <div class="card-actions">
       <span class="priority-badge">{{ priority }}</span>
-      <button class="btn-edit" (click)="onEdit()">✎</button>
-      <button class="btn-delete" (click)="onDelete()">×</button>
+      <button class="icon-btn edit-btn" (click)="onEdit()">✎</button>
+      <button class="icon-btn delete-btn" (click)="onDelete()">×</button>
     </div>
   </div>
   <div class="card-body">
-    <p>{{ description }}</p>
+    <p class="card-description ">{{ description }}</p>
   </div>
 </div>

@@ -1,5 +1,5 @@
 # ===== Build Stage =====
-FROM node:16 AS build
+FROM node:20 AS build
 
 WORKDIR /app
 
@@ -14,6 +14,6 @@ RUN npm run build -- --configuration production
 # ===== Runtime Stage =====
 FROM nginx:stable-alpine
 
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist/kanban-board /usr/share/nginx/html
 
 EXPOSE 80
